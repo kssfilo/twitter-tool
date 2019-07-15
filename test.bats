@@ -1,7 +1,25 @@
 #!/usr/bin/env bats
 
 @test "verify account" {
-	test "$(echo $(../dist/cli.js  -g account/verify_credentials -J '$.following' ))" = 'false'
+@PARTPIPE@ONLINETEST
+	skip
+@PARTPIPE@
+	test "$(echo $(../dist/cli.js a/v -J '$.following' ))" = 'false'
+}
+
+@test "media upload" {
+@PARTPIPE@ONLINETEST
+	skip
+@PARTPIPE@
+	test "$(echo $(../dist/cli.js -m ok.png -u kssfilo -p 's/up' -o 's:twitter-tool media upload test passed.' -J $.text |sed 's/:\/\/.*$//' |tr -d '"'))" = 'twitter-tool media upload test passed. https'
+}
+
+@test "st/s/3" {
+	diff <(../dist/cli.js -h st/s/3) sts3.txt
+}
+
+@test "status/show/:id" {
+	diff <(../dist/cli.js -h status/show/:id) sts3.txt
 }
 
 @test "-j with 2 line 1 column" {
@@ -34,3 +52,8 @@
 @test "-J with 2 line 2 column" {
 	test "$(echo $(cat test.json|../dist/cli.js -T -J '$.statuses[*].id_str|$.statuses[*].user.screen_name'))" = '1111111111111111111,kssfilo 2222222222222222222,nodenode'
 }
+
+@test "default output" {
+	test "$(echo $(cat test.json|../dist/cli.js -T))" = "{ statuses: [ [Object], [Object] ], search_metadata: { completed_in: 0.025, max_id: 1150399715965427700, max_id_str: '1150399715965427712', next_results: '?max_id=1150381594085081087&q=%40nodejs&count=3&include_entities=1', query: '%40nodejs', refresh_url: '?since_id=1150399715965427712&q=%40nodejs&include_entities=1', count: 3, since_id: 0, since_id_str: '0' } }"
+}
+

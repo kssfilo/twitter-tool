@@ -1,32 +1,25 @@
-# @PARTPIPE@NAME@PARTPIPE@ - @PARTPIPE@DESCRIPTION@PARTPIPE@
+# twitter-tool - Command Line Twitter Client
 
-@PARTPIPE@DESCRIPTION
-@PARTPIPE@
+Twitter Command Line Tool.simple but flexible interface to access all REST API by short abbreviated commands then easy to re-use data by JSONPath/CSV. JPG/PNG upload support.
 
-- [Documentation(npmjs)](https://www.npmjs.com/@PARTPIPE@NAME@PARTPIPE@)
-- [Bug Report(GitHub)](https://github.com/kssfilo/@PARTPIPE@NAME@PARTPIPE@)
+    $ twitter  s/up -o 's_n:Photo from twitter-tool!' -m photo.jpg
+
+- [Documentation(npmjs)](https://www.npmjs.com/twitter-tool)
+- [Bug Report(GitHub)](https://github.com/kssfilo/twitter-tool)
 - [Home Page](https://kanasys.com/gtech/)
-
-## Example
-
-```
-```
 
 ## Install
 
-```
-npm install -g @PARTPIPE@NAME@PARTPIPE@ 
-```
-# Usage
+    npm i -g twitter-tool
 
 @PARTPIPE@|dist/cli.js -h
 
-You can see detail usage on npmjs.com or norl -h 
+You can see detail usage on npmjs.com
 
-- [Documentation(npmjs)](https://www.npmjs.com/package/norl)
+- [Documentation(npmjs)](https://www.npmjs.com/package/twitter-tool)
 
 @PARTPIPE@
 
 ## Change Log
 
-- 0.0.x: first release
+- 0.1.x: beta release

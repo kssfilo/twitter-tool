@@ -1,7 +1,7 @@
 {
   "@PARTPIPE@_@PARTPIPE@name": "@PARTPIPE@NAME@PARTPIPE@",
   "description": "@PARTPIPE@DESCRIPTION@PARTPIPE@",
-  "main": "@PARTPIPE@NAME@PARTPIPE@.js",
+  "main": "cli.js",
   "license": "MIT",
   "bin": {
     "@PARTPIPE@BINNAME@PARTPIPE@": "./cli.js"
@@ -19,7 +19,8 @@
   "devDependencies": {
     "coffee-jshint": "1.1.1",
     "coffeescript": "2.4.1",
-    "partpipe": "0.4.0"
+    "partpipe": "0.4.0",
+    "norl": "2.3.4"
   },
   "tags": [],
   "keywords": [
