@@ -244,18 +244,24 @@ try
 				E "trying to verify your credential. if you see your info below, It's OK."
 			when 'o'
 				try
-					j=p[0].trim()
-					unless j.match /^{.+}$/    #q:value,v:value...
-						D "-o arg look like not JSON yet. try to convert '#{j}'"
-						js=j.split ','
-						js=js.map (x)=>x.replace /^"?([^:]+?)"?:"?(.+?)"?$/,"\"$1\":\"$2\""
-						j="{#{js.join(',')}}"
-						D "converterd: #{j}"
-					ctx.restParam=JSON.parse j
-					D "param: #{JSON.stringify ctx.restParam}"
+					ctx.restParam=JSON.parse p[0]
 				catch e
-					E e
-					process.exit 1
+					D "-o arg looks like not JSON. try to convert '#{p[0]}'"
+					j=p[0].trim()
+
+					jb=j.replace /^ *{ *(.+?) *} *$/,"$1"
+					D "outer {} removed:'#{jb}'"
+					js=jb.split ','
+					js=js.map (x)=>x.replace /^ *["']?([^:]+?)["']? *: *['"]?(.+?)['"]? *$/,"\"$1\":\"$2\""
+					j="{#{js.join(',')}}"
+
+					D "converterd: #{j}"
+					try
+						ctx.restParam=JSON.parse j
+						D "success: #{JSON.stringify ctx.restParam}"
+					catch e
+						E "-o invalid parameter. #{j} "
+						process.exit 1
 			when 'i'
 				ctx.command='initUser'
 			when 'I'

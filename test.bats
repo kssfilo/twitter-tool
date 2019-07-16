@@ -22,6 +22,14 @@
 	diff <(../dist/cli.js -h status/show/:id) sts3.txt
 }
 
+@test "single quote param" {
+	test "$(../dist/cli.js -n s/t -o "q:'search',lang:'ja'" -d 2>&1|grep 'params:')" = 'params:{"q":"search","lang":"ja"}'
+}
+
+@test "Javascript Object param" {
+	test "$(../dist/cli.js -n s/t -o "{ q:  'search' ,  lang: 'ja'  }" -d 2>&1|grep 'params:')" = 'params:{"q":"search","lang":"ja"}'
+}
+
 @test "-j with 2 line 1 column" {
 	test "$(echo $(cat test.json|../dist/cli.js -T -j '$.statuses[*].id_str'))" = '[ "1111111111111111111", "2222222222222222222" ]'
 }

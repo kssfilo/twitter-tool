@@ -3,7 +3,7 @@
 
 NAME=twitter-tool
 BINNAME=twitter
-VERSION=0.1.0
+VERSION=0.1.2
 DESCRIPTION=Twitter Command Line Tool.simple but flexible interface to access all REST API by short abbreviated commands then easy to re-use data by JSONPath/CSV. JPG/PNG upload support.
 KEYWORDS=twitter command-line command line commandline tool cli bot JSON path jsonpath CSV client  tweet list search favorite follow unfollow media jpg png upload multi-account abbreviation
 NODEVER=8
