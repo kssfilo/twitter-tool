@@ -251,7 +251,9 @@ try
 
 					jb=j.replace /^ *{ *(.+?) *} *$/,"$1"
 					D "outer {} removed:'#{jb}'"
-					js=jb.split ','
+
+					js=jb.split /,(?=[^,]+:)/
+					D "splited:#{JSON.stringify js}"
 					js=js.map (x)=>x.replace /^ *["']?([^:]+?)["']? *: *['"]?(.+?)['"]? *$/,"\"$1\":\"$2\""
 					j="{#{js.join(',')}}"
 
