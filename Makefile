@@ -23,6 +23,7 @@ DOCS=$(patsubst %,$(DESTDIR)/%,$(DOCNAMES))
 ALL=$(TARGETS) $(DOCS)
 SDK=node_modules/.gitignore
 TOOLS=node_modules/.bin
+SHELL=/bin/bash
 USER=
 ONLINE=
 
@@ -41,14 +42,19 @@ docs:$(DOCS)
 
 test:test.passed
 
-test-main:$(TARGETS) username.txt tests/test.bats
+test-main:$(TARGETS) username.txt tests/test.bats tests/large.json
 	cd tests;TWITTER_USER=$$(cat ../username.txt) ./test.bats
 	rm tests/test.bats
+
+tests/large.json:
+	echo -n '{"test":"' >$@
+	dd if=/dev/urandom bs=1k count=1024|base64 |tr -d "\n" >>$@
+	echo '"}' >>$@
 
 pack:$(ALL) test.passed |$(DESTDIR)
 
 clean:
-	-@rm -rf $(DESTDIR) username.txt package-lock.json test.passed node_modules tests/test.bats params-*.json 2>&1 >/dev/null ;true
+	-@rm -rf $(DESTDIR) username.txt package-lock.json test.passed node_modules tests/test.bats tests/large.json params-*.json 2>&1 >/dev/null ;true
 
 configclean:
 	-@rm -rf ~/.recipe-js/$(BINNAME).json

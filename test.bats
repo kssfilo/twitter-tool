@@ -14,6 +14,10 @@
 	test "$(echo $(../dist/cli.js -m ok.png -u kssfilo -p 's/up' -o 's:twitter-tool media upload test passed.' -J $.text |sed 's/:\/\/.*$//' |tr -d '"'))" = 'twitter-tool media upload test passed. https'
 }
 
+@test "large json" {
+	diff <(cat large.json |../dist/cli.js -T -lj |sed ) large.json
+}
+
 @test "st/s/3" {
 	diff <(../dist/cli.js -h st/s/3) sts3.txt
 }
@@ -27,7 +31,7 @@
 }
 
 @test "Javascript Object param" {
-	test "$(../dist/cli.js -n s/t -o "{ q:  'search' ,  lang: 'ja'  }" -d 2>&1|grep 'params:')" = 'params:{"q":"search","lang":"ja"}'
+	test $(../dist/cli.js -n s/t -o "{ q:  'search' ,  lang: 'ja'  }" -d 2>&1|grep 'params:') = 'params:{"q":"search","lang":"ja"}'
 }
 
 @test "-j with 2 line 1 column" {

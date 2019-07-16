@@ -222,11 +222,11 @@ try
 			when 'T'
 				ctx.command='inject'
 			when 'j'
-				ctx.jsonPath=if p[0] isnt '' then p[0] else "$"
+				ctx.jsonPath=if p[0] isnt '' then p[0] else ""
 			when 'm'
 				ctx.uploadFiles=p
 			when 'J'
-				ctx.jsonPath=if p[0] isnt '' then p[0] else "$"
+				ctx.jsonPath=if p[0] isnt '' then p[0] else ""
 				ctx.outputCsv=true
 			when 'e'
 				ctx.inspectDepth=if p[0] isnt '' then Number(p[0]) else ctx.inspectDepth
@@ -631,12 +631,13 @@ try
 						{convertArrayToCSV}=require('convert-array-to-csv')
 						r=convertArrayToCSV(r)
 				else
-					p=JSONPath
-						path:ctx.jsonPath
-						json:r
-						wrap:true
-					D "apply:#{ctx.jsonPath} ->"
-					r=p
+					unless ctx.jsonPath is ''
+						p=JSONPath
+							path:ctx.jsonPath
+							json:r
+							wrap:true
+						D "apply:#{ctx.jsonPath} ->"
+						r=p
 			else
 				adjust=0
 				adjust=1 if Array.isArray(r) or Object.keys(r).length < ctx.inspectAdjustCount
