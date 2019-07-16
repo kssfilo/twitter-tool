@@ -15,7 +15,7 @@
 }
 
 @test "large json" {
-	diff <(cat large.json |../dist/cli.js -T -lj |sed ) large.json
+	diff <(cat large.json |../dist/cli.js -T -lj |tee /dev/null ) large.json
 }
 
 @test "st/s/3" {

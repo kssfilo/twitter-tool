@@ -658,7 +658,8 @@ try
 		if typeof(ctx.outputFileName) is 'string'
 			Fs.writeFileSync ctx.outputFileName,result
 		else
-			P result.trim()
+			process.stdout.write result+"\n",()=>
+				process.exit 0
 
 	switch ctx.command
 		when 'nothing'
