@@ -3,14 +3,14 @@
 
 NAME=twitter-tool
 BINNAME=twitter
-VERSION=0.1.4
+VERSION=0.1.7
 DESCRIPTION=Twitter Command Line Tool.simple but flexible interface to access all REST API by short abbreviated commands then easy to re-use data by JSONPath/CSV. JPG/PNG upload support.
 KEYWORDS=twitter command-line command line commandline tool cli bot JSON path jsonpath CSV client  tweet list search favorite follow unfollow media jpg png upload multi-account abbreviation
 NODEVER=8
 LICENSE=MIT
 
 PKGKEYWORDS=$(shell echo $$(echo $(KEYWORDS)|perl -ape '$$_=join("\",\"",@F)'))
-PARTPIPETAGS="_@" "VERSION@$(VERSION)" "NAME@$(NAME)" "BINNAME@$(BINNAME)" "DESCRIPTION@$(DESCRIPTION)" 'KEYWORDS@$(PKGKEYWORDS)' "NODEVER@$(NODEVER)" "LICENSE@$(LICENSE)" 
+PARTPIPETAGS="_=" "VERSION=$(VERSION)" "NAME=$(NAME)" "BINNAME=$(BINNAME)" "DESCRIPTION=$(DESCRIPTION)" 'KEYWORDS=$(PKGKEYWORDS)' "NODEVER=$(NODEVER)" "LICENSE=$(LICENSE)" 
 
 #=
 

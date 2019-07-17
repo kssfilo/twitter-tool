@@ -19,7 +19,7 @@
   "devDependencies": {
     "coffee-jshint": "1.1.1",
     "coffeescript": "2.4.1",
-    "partpipe": "0.4.0",
+    "partpipe": "1.0.0",
     "norl": "2.3.4"
   },
   "tags": [],
