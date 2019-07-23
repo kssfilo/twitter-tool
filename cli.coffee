@@ -76,9 +76,9 @@ resolveAbbreviation=(abr,sep,cand,keepId=true)=>
 		id=a.match(/\/(\d+)$/)?[1]
 		a=a.replace /\/\d+$/,"/:id"
 
-	if abr in cand
+	if a in cand
 		D "#{a} is found in command/param list."
-		return abr
+		return if keepId then abr else a
 
 	s=a.split sep
 
@@ -131,6 +131,9 @@ getCommandList=(doc,width=null)=>
 
 getParamsList=(command,doc)=>
 	r=[]
+
+	D "looking up parameters for #{command}"
+
 	d=doc[command].params
 	pns=(i.name for i in  d)
 
