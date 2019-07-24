@@ -110,21 +110,21 @@ getCommandList=(doc,width=null)=>
 		r.push "#{k} (#{findShortestAbbreviation k,Object.keys(doc),'/'})"
 	
 	r.sort()
-
+	
 	if !width?
 		r.join(" | ")
 	else
 		maxlen=_.max(i.length for i in r)
-		D maxlen
+		#D maxlen
 		for v,i in r
 			r[i]=_.padEnd(v,maxlen)
 		
 		num=width//maxlen
-		D num
+		#D num
 		sr=''
 		i=0
 		while(s=r.shift())
-			sr+=r.shift()
+			sr+=s
 			i++
 			sr+="\n" if i%num is 0
 		sr
