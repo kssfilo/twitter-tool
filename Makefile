@@ -3,7 +3,7 @@
 
 NAME=twitter-tool
 BINNAME=twitter
-VERSION=0.1.12
+VERSION=0.2.0
 DESCRIPTION=Twitter Command Line Tool.simple but flexible interface to access all REST API by short abbreviated commands then easy to re-use data by JSONPath/CSV. JPG/PNG upload support.
 KEYWORDS=twitter command-line command line commandline tool cli bot JSON path jsonpath CSV client  tweet list search favorite follow unfollow media jpg png upload multi-account abbreviation
 NODEVER=8
@@ -109,7 +109,10 @@ PARAMFILES:$(patsubst %,params,%.csv,$(APINAMES))
 $(DESTDIR)/twitterapi.json:twitterapi.json
 	cp $< $@
 
-twitterapi.json:api_list.csv params.flg
+twitterapi.json:officialtwitterapi.json
+	$(TOOLS)/norl $< -jJe '$$_["search/tweets"].params.push({name:"tweet_mode",required:"optional","description":"(hidden)Specify [extended] to get full_text which is over 115 chars"})' > $@
+
+officialtwitterapi.json:api_list.csv params.flg
 	norl api_list.csv  -B 't={}' -ane 't[$$F[1]]=require(`$${process.cwd()}/params-$${$$F[1].replace(/\//g,"@")}.json`)' -JE '$$_=t' >$@
 
 params.flg:api_list.csv
